@@ -12,7 +12,7 @@ env_values = {
 class DBConfig:
     vendor = env_values.get('DB_VENDOR')
     host = env_values.get('DB_HOST')
-    port = env_values.get('DB_PORT')
+    port = int(env_values.get('DB_PORT'))
     username = env_values.get('DB_USERNAME')
     password = env_values.get('DB_PASSWORD')
     db_name = env_values.get('DB_DBNAME')
