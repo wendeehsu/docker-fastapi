@@ -6,7 +6,7 @@ app = fastapi.FastAPI()
 
 @app.get('/')
 async def index():
-    return "I'm alive!"
+    return "I'm alive! <a href=/docs>/docs</a>"
 
 
 @app.get('/insert')

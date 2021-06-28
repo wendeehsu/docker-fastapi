@@ -24,6 +24,11 @@ uvicorn app:app
 
 And you will see, in your terminal, that uvicorn is running at a specific location e.g. `http://localhost:8000`
 
+### To test if it works
+
+Go to `/docs` and you will see a interactable documentation UI of working functions.  
+If the service is running at `http://localhost:8000`, the documentation UI will be at `http://localhost:8000/docs`.
+
 
 ### Configuration
 Config with environment variables or `.env` file.
