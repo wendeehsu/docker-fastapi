@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  web:
+    container_name: fastapi
+    depends_on:
+      - db
+    build: .
+    command: uvicorn app:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    networks:
+      - fastapi_network
+
+  db:
+    image: mysql
+    container_name: docker-mysql
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    networks:
+      - fastapi_network
+
+networks:
+  default:
+    external:
+      name: bridge
+  fastapi_network:
+    name: fastapi_network
+    driver: bridge
+    external: true
