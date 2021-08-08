@@ -5,27 +5,26 @@ services:
     depends_on:
       - db
     build: .
-    command: uvicorn app:app --host 0.0.0.0 --port 8000
     ports:
       - "8000:8000"
-    networks:
-      - fastapi_network
+    links: 
+      - "db:db"
+    env_file: 
+      - .env
 
   db:
     image: mysql
     container_name: docker-mysql
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./schema:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=test
+      # - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     expose:
       - "3306"
-    networks:
-      - fastapi_network
-
-networks:
-  default:
-    external:
-      name: bridge
-  fastapi_network:
-    name: fastapi_network
-    driver: bridge
-    external: true
+    env_file: 
+      - .env
